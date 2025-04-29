@@ -36,7 +36,6 @@ export default function RootLayout({
       <head>
         <title>BONKSWAP - Swap Solana Tokens Fast and Easy</title>
         <meta name="description" content="BONKSWAP is a fast, secure, and easy-to-use DEX for swapping Solana tokens with low fees and high liquidity." />
-        <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="apple-touch-icon" href="/bonkswap-logo.png" />
       </head>
       <body className={inter.className}>
