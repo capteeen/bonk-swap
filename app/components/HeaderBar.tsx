@@ -6,6 +6,21 @@ import WalletConnectButton from './WalletConnectButton';
 
 const HeaderBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [copied, setCopied] = useState(false);
+  
+  // BONK contract address
+  const contractAddress = "DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263";
+  
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(contractAddress)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      })
+      .catch(err => {
+        console.error('Failed to copy text: ', err);
+      });
+  };
   
   return (
     <header className="w-full bg-gradient-to-r from-orange-400 to-yellow-300 rounded-b-3xl shadow-lg">
@@ -24,6 +39,26 @@ const HeaderBar = () => {
             />
           </div>
           <span className="text-xl md:text-3xl font-extrabold text-white tracking-wide drop-shadow-md">BONKSWAP</span>
+        </div>
+        
+        {/* Contract Address - Desktop */}
+        <div className="hidden md:flex items-center bg-white/20 rounded-full px-3 py-1.5 hover:bg-white/30 transition-colors cursor-pointer" onClick={copyToClipboard}>
+          <div className="flex items-center">
+            <span className="text-sm text-white font-medium mr-2">Contract:</span>
+            <span className="text-sm text-white">{`${contractAddress.slice(0, 6)}...${contractAddress.slice(-4)}`}</span>
+            <div className="ml-2 text-white">
+              {copied ? (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                </svg>
+              ) : (
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                  <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                </svg>
+              )}
+            </div>
+          </div>
         </div>
         
         {/* Mobile menu button */}
@@ -66,7 +101,7 @@ const HeaderBar = () => {
           
           {/* Telegram link */}
           <a 
-            href="https://t.me/BonkSwapsol" 
+            href="https://t.me/BONKSWAPCHAT" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center hover:text-yellow-100"
@@ -91,6 +126,29 @@ const HeaderBar = () => {
       {/* Mobile menu */}
       <div className={`md:hidden ${menuOpen ? 'block' : 'hidden'} px-4 pb-4`}>
         <nav className="flex flex-col gap-4 text-lg font-semibold text-white">
+          {/* Contract Address - Mobile */}
+          <div 
+            className="flex items-center bg-white/20 rounded-full px-3 py-2 hover:bg-white/30 transition-colors cursor-pointer mb-2" 
+            onClick={copyToClipboard}
+          >
+            <div className="flex items-center w-full justify-between">
+              <span className="text-sm text-white font-medium">Contract:</span>
+              <span className="text-sm text-white">{`${contractAddress.slice(0, 6)}...${contractAddress.slice(-4)}`}</span>
+              <div className="ml-2 text-white">
+                {copied ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M8 2a1 1 0 000 2h2a1 1 0 100-2H8z" />
+                    <path d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z" />
+                  </svg>
+                )}
+              </div>
+            </div>
+          </div>
+          
           {/* Twitter link */}
           <a 
             href="https://x.com/bonk_swap_sol?s=21&t=ARvJV7n4r1UMTlD-08jo_g" 
@@ -111,7 +169,7 @@ const HeaderBar = () => {
           
           {/* Telegram link */}
           <a 
-            href="https://t.me/BonkSwapsol" 
+            href="https://t.me/BONKSWAPCHAT" 
             target="_blank" 
             rel="noopener noreferrer"
             className="flex items-center hover:text-yellow-100"
